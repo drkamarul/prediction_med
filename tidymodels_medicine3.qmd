@@ -1,0 +1,517 @@
+---
+title: "Making Prediction Using Tidymodels in Medicine"
+author:
+  - name: Kamarul Imran Musa (Assoc Prof)
+    orcid: 0000-0002-3708-0628
+    email: drkamarul@usm.my 
+    affiliations:
+      - name: School of Medical Sciences, Universiti Sains Malaysia
+format: 
+  revealjs:
+    theme: moon
+    echo: true
+    scroallable: true
+    smaller: true
+    slide-number: true
+    footer: "[Tidymodels in Med]()"
+editor: visual
+---
+
+## Motivation
+
+Physician usually have these roles when looking at patients data.
+
+-   to understand factors why patients develop certain diseases (inference)
+-   to guess the outcomes for patients (prediction)
+
+This talk is about the second role.
+
+For example, physicians working at ED will want to guess the correct triage category when a patient is brought to ED:
+
+-   patient A with fever, loss of appetite and lethargy
+-   patient B with chest pain, sweating and history of diabetes
+
+------------------------------------------------------------------------
+
+## Limitation
+
+However, physicians' minds, no matter how bright or experienced will not able
+
+-   to store, recall, and correctly analyze many medical information\
+-   to optimally and accurately guess the outcome
+
+Predictive analytics will physicians to make *more accurate* **guess**:
+
+-   uses machine learning or ML
+-   allows clinicians to augment his guess by computers
+-   analysed data such as many complains, signs and symptoms and clinical conditions (human only rely on their brains and experience).
+
+The end result is more accurate guess or **prediction**.
+
+------------------------------------------------------------------------
+
+## About me
+
+::: columns
+::: {.column width="40%"}
+![R Book with Dr Wan Nor Arifin](book.PNG)
+:::
+
+::: {.column width="60%"}
+-   I am a medical epidemiologist and a fellow of the American College of Epidemiology.
+
+-   These are the links for my [SCOPUS publication](https://www.scopus.com/authid/detail.uri?authorId=57194536466), my [GitHub](https://github.com/drkamarul) and [personal webpage](https://myanalytics.com.my/).
+
+-   I am also on [Twitter](https://twitter.com/kamarul_imran) and I welcome opportunities for future collaborations and training.
+:::
+:::
+
+------------------------------------------------------------------------
+
+## About this talk
+
+-   provides very high level of doing predictive analytics in medicine using R language
+-   demonstrate very brief **tidymodels** package
+-   can be a starting point for physicians interested in running machine learning algorithms in RStudio IDE
+
+![Tidymodels](tidymodels.PNG)
+
+------------------------------------------------------------------------
+
+## Inference
+
+In clinical and medical research
+
+-   physicians get a set of data
+-   they with the help of disease modellers use statistical modelling (most of the time) to make inferences.
+-   This is known as inference statistics
+
+Inferential statistics is formally defined as
+
+-   **a field of statistics that uses analytical tools for drawing conclusions about a population by examining random samples**.
+
+------------------------------------------------------------------------
+
+## Inference
+
+The goal of inferential statistics is to make generalizations about a population. Physicians want to understand the relationship between certain variables (such as risk factors) with having a disease or having a certain outcome of the disease.
+
+Read more [here](https://www.cuemath.com/data/inferential-statistics/)
+
+![Is this inference](XKCD.PNG)
+
+------------------------------------------------------------------------
+
+## Prediction
+
+-   Physicians use existing data set
+-   They choose models or algorithms that will reliably choose the correct outcome of a disease.
+
+The outcome can be categorical
+
+-   such as fatality (alive or dead), complications (yes or no).
+-   These are examples of classification problem.
+
+The outcome can be values
+
+-   such as values of fasting blood sugar, quality of life scores, disability scores, expression.
+-   these are examples of regression problems.
+
+------------------------------------------------------------------------
+
+## Prediction
+
+To perform prediction (predictive analytics)
+
+-   physicians usually use machine learning methods.
+-   support vector machine classifier to predict clinical deterioration on magnetic resonance imaging,
+-   random forest to predict cancer diagnosis and
+-   deep learning to classify mammogram images into cancerous or non-cancerous.
+
+Usually predictive analytics can be grouped into
+
+-   supervised learning
+-   unsupervised learning
+-   reinforcement learning
+
+------------------------------------------------------------------------
+
+### Supervised learning
+
+Supervised learning is a machine learning approach that's defined by its use of labeled datasets.
+
+-   **Regression problems or models**: For models predicting a numeric outcome. A type of supervised learning method that uses an algorithm to understand the relationship between dependent and independent variables. Regression models are helpful for predicting numerical values based on different data points, such as sales revenue projections for a given business.
+
+-   **Classification problems or models**: For models predicting a categorical response. It uses an algorithm to accurately assign test data into specific categories, such as separating apples from oranges. Or, in the real world, supervised learning algorithms can be used to classify spam in a separate folder from your inbox.
+
+------------------------------------------------------------------------
+
+## Tidymodels
+
+The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.
+
+::: columns
+::: {.column width="40%"}
+![Tidymodels](tidymodels.PNG)
+:::
+
+::: {.column width="60%"}
+-   **rsample** : to split sample (e.g. train/test or cross-validation)
+-   **recipes** : for pre-processing
+-   **workflow** : workflows bundle pre-processing, modeling, and post-processing together
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Tidymodels
+
+The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.
+
+::: columns
+::: {.column width="40%"}
+![Tidymodels](tidymodels.PNG)
+:::
+
+::: {.column width="60%"}
+-   **tune** : tune helps you optimize the hyperparameters of your model and pre-processing steps.
+-   **parsnip** : to specify model
+-   **yardstick** : to evaluate model
+:::
+:::
+
+## Demo
+
+------------------------------------------------------------------------
+
+## Preparation
+
+Open new R project, then load packages:
+
+-   **tidyverse** : for data wrangling and data visualization
+-   **haven** : to read statistical data
+-   **gtsummary** : to produce statistical tables
+
+```{r, warning=FALSE}
+library(tidyverse)
+library(haven)
+library(tidymodels)
+library(caret)
+library(gtsummary)
+```
+
+## Read data
+
+-   Dataset named `stroke_fatality.dta` (in *STATA* format).
+-   Read then convert it to an R object of class `data.frame`
+
+```{r wrangling}
+dead <- read_dta('stroke_fatality.dta') %>% 
+  data.frame()
+```
+
+-   Convert labelled variables to dummy variables
+
+```{r}
+dead <- dead %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+------------------------------------------------------------------------
+
+Variables :
+
+```{r}
+glimpse(dead)
+```
+
+Outcome variable :
+
+```{r}
+dead %>%
+  count(status2)
+```
+
+------------------------------------------------------------------------
+
+## Split data
+
+-   A stratified random sample would conduct the 60/80 split within each of these data subsets
+
+-   Then pool the results together.
+
+-   In **rsample**, this is achieved using the strata argument. Usually split is done 80/20 or 70/30
+
+Resource [here](https://www.tidymodels.org/start/case-study/)
+
+## Training and testing data
+
+-   Split
+
+```{r}
+set.seed(123)
+dead_split <- initial_split(dead, 
+                            prop = 0.6, 
+                            strata = status2)
+dead_split
+```
+
+-   Extract training set from the split
+
+```{r}
+dead_train <- training(dead_split)
+```
+
+-   Extract testing set from the split
+
+```{r}
+dead_test <- testing(dead_split)
+```
+
+-   Extract validation set from training set
+
+```{r}
+set.seed(234)
+dead_val <- validation_split(dead_train, 
+                            strata = status2, 
+                            prop = 0.60)
+```
+
+------------------------------------------------------------------------
+
+## Model
+
+As the outcome is categorical, we will use logistic regression model from **glmnet** package
+
+```{r}
+lr_mod <- 
+  logistic_reg(penalty = tune(), mixture = 1) %>% 
+  set_engine("glmnet")
+```
+
+-   `tune()` will find the best value for making predictions
+-   mixture = 1 allows glmnet model to remove irrelevant predictors and choose a simpler model
+
+**glmnet** package:
+
+-   fits generalized linear and similar models via penalized maximum likelihood.
+-   computes regularized path to obtain the lasso or elastic net penalty
+-   uses grid of values (on the log scale) for the regularization parameter lambda.
+
+Resource is [here](https://glmnet.stanford.edu/index.html)
+
+------------------------------------------------------------------------
+
+## Recipe
+
+-   Define the preprocessing steps using recipe
+
+```{r}
+lr_recipe <- 
+  recipe(status2 ~ ., data = dead_train) %>% 
+  step_dummy(all_nominal_predictors()) %>% 
+  step_other(threshold = 0.20) %>%
+  step_impute_knn(all_predictors()) %>%
+  step_zv(all_predictors()) %>% 
+  step_normalize(all_predictors()) 
+```
+
+-   `step_dummy()` : converts characters or factors numeric binary model terms
+-   `step_zv()` : removes indicator variables that only contain a single unique value (e.g. all zeros).
+-   `step_normalize()` : centers and scales numeric variables
+
+------------------------------------------------------------------------
+
+## Workflow and Tuning
+
+Create a workflow for our ML algorithm
+
+```{r}
+lr_workflow <- 
+  workflow() %>% 
+  add_model(lr_mod) %>% 
+  add_recipe(lr_recipe)
+```
+
+Perform fine tuning
+
+-   `dials::grid_regular()` : create an expanded grid based on a combination of two hyperparameters
+-   set the grid up manually using a one-column tibble with 30 candidate values
+
+```{r}
+lr_reg_grid <- 
+  tibble(penalty = 10^seq(-4, -1, length.out = 30))
+```
+
+------------------------------------------------------------------------
+
+## Train and tune model
+
+-   `tune::tune_grid()` : trains 30 penalized logistic regression models
+-   save the validation set predictions using `control_grid()`
+-   area under the ROC curve will be used to quantify how well the model performs
+
+```{r}
+lr_res <- 
+  lr_workflow %>% 
+  tune_grid(dead_val,
+            grid = lr_reg_grid,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(roc_auc))
+```
+
+------------------------------------------------------------------------
+
+Get the validation set metrics:
+
+```{r}
+lr_plot <- 
+  lr_res %>% 
+  collect_metrics() %>% 
+  ggplot(aes(x = penalty, y = mean)) + 
+  geom_point() + 
+  geom_line() + 
+  ylab("Area under the ROC Curve") +
+  scale_x_log10(labels = scales::label_number())
+```
+
+
+::: columns
+
+::: {.column width="75%"}
+
+```{r}
+lr_plot
+```
+
+:::
+
+::: {.column width="25%"}
+
+- Model performance is generally better after 0.01
+- suggesting some predictors are important to the model.
+:::
+:::
+
+
+
+------------------------------------------------------------------------
+
+-   `roc_auc` metric alone could lead us to multiple options for the *best* value for this hyperparameter:
+
+```{r}
+top_models <-
+  lr_res %>% 
+  show_best("roc_auc", n = 15) %>% 
+  arrange(penalty) 
+top_models
+```
+
+------------------------------------------------------------------------
+
+We prefer to choose a penalty value further along the x-axis, closer to where we start to see the decline in model performance.
+
+```{r}
+lr_best <- 
+  lr_res %>% 
+  collect_metrics() %>% 
+  arrange(penalty) %>% 
+  slice(24)
+lr_best
+```
+
+------------------------------------------------------------------------
+
+Visualize the roc curve using the bect penalty values
+
+```{r}
+lr_auc <- 
+  lr_res %>% 
+  collect_predictions(parameters = lr_best) %>% 
+  roc_curve(status2, .pred_alive) %>% 
+  mutate(model = "Logistic Regression")
+autoplot(lr_auc)
+```
+
+------------------------------------------------------------------------
+
+## Suggested workflow
+
+::: columns
+
+::: {.column width="70%"}
+![Workflow](wf.png)
+:::
+
+::: {.column width="30%"}
+
+-   Clearly understand the objective of analysis: Inference or prediction
+-   Identify the data
+-   Decide the quality of data
+-   Split data
+-   Pre-procession
+-   Test accuracy
+:::
+:::
+
+## To be effective
+
+-   create a team consisting of at least a subject matter expert and a programming expert
+-   vetted the workflow
+-   assess quality of prediction and vet the accuracy\
+-   do not peak data
+-   assess quality of data
+
+## Bias in ML using medical data
+
+-   ML-based systems can be subject to systematic errors in their ability to classify subgroups of patients, estimate risk levels, or make predictions.
+-   Conflicting resuls from artificial intelligence (AI) models in health care vs in the clinical routine. due to several ethical and societal challenges
+-   For example: difference in skin color (using machine to detect abnormalities on skin)
+
+Read more from this [source](https://www.nature.com/articles/s43856-021-00028-w)
+
+## Bias
+
+::: columns
+
+::: {.column width="75%"}
+
+![Bias](bias.jpg){width="200%"}
+
+:::
+
+::: {.column width="25%"}
+
+Statistical bias
+
+- cases in which the distribution of a given dataset is not reflecting the true distribution of the population.
+
+Social bias
+
+- inequities that may result in suboptimal outcomes for given groups of the human population
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Mitigating bias
+
+![Strategies for mitigating bias across the different steps in machine learning systems development](mitigating_bias.png)
+
+[Source](https://www.nature.com/articles/s43856-021-00028-w)
+
+---
+
+## Summary
+
+- Prediction is different from inference
+- Use prediction to **guess** the outcome using data
+- Not to understand the relationship between independent variable and an outcome from data
+- Outcomes include categorical or numerical outcome
+- Various prediction models 
+- Most models use machine learning methods
+- Many packages but most used in R is **tidymodels**
+- Better quality data leads to more valid prediction
+
+
+
