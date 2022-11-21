@@ -31,6 +31,8 @@ For example, physicians working at ED will want to guess the correct triage cate
 -   patient A with fever, loss of appetite and lethargy
 -   patient B with chest pain, sweating and history of diabetes
 
+[Slides](https://drkamarul.github.io/prediction_med/)
+
 ------------------------------------------------------------------------
 
 ## Limitation
@@ -483,7 +485,7 @@ Social bias
 
 ## Mitigating bias
 
-![Strategies for mitigating bias across the different steps in machine learning systems development](mitigating_bias.PNG)
+![Strategies for mitigating bias across the different steps in machine learning systems development](mitigatingbias.PNG)
 
 [Source](https://www.nature.com/articles/s43856-021-00028-w)
 
