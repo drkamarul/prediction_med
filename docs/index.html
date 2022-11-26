@@ -407,16 +407,16 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 </section>
 <section id="motivation" class="slide level2">
 <h2>Motivation</h2>
-<p>Physician usually have these roles when looking at patients data.</p>
+<p>Physician usually have these objectives when looking at patients data:</p>
 <ul>
 <li>to understand factors why patients develop certain diseases (inference)</li>
-<li>to guess the outcomes for patients (prediction)</li>
+<li>to guess the most probable diagnosis or outcome for a patient (prediction)</li>
 </ul>
-<p>This talk is about the second role.</p>
-<p>For example, physicians working at ED will want to guess the correct triage category when a patient is brought to ED:</p>
+<p>This talk is about the second objective.</p>
+<p>For example,</p>
 <ul>
-<li>patient A with fever, loss of appetite and lethargy</li>
-<li>patient B with chest pain, sweating and history of diabetes</li>
+<li><p>physicians working at ED will want to guess the correct triage category when a patient is brought to ED with chest pain, sweating and history of diabetes mellitus</p></li>
+<li><p>an epidemiologist may want to pick the best health outcome for patients who smoke cigarettes, practice sedentary life style and has diabetes mellitus.</p></li>
 </ul>
 <p><a href="https://drkamarul.github.io/prediction_med/">Slides</a></p>
 </section>
@@ -424,17 +424,17 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 <h2>Limitation</h2>
 <p>However, physicians’ minds, no matter how bright or experienced will not able</p>
 <ul>
-<li>to store, recall, and correctly analyze many medical information<br>
+<li>to store, recall, and correctly analyze many medical information simultenously<br>
 </li>
-<li>to optimally and accurately guess the outcome</li>
+<li>to optimally and accurately guess the diagnosis or outcome in complicated medical problems</li>
 </ul>
-<p>Predictive analytics will physicians to make <em>more accurate</em> <strong>guess</strong>:</p>
+<p>Predictive analytics helps physicians make <em>more accurate</em> <strong>guess</strong>:</p>
 <ul>
-<li>uses machine learning or ML</li>
-<li>allows clinicians to augment his guess by computers</li>
-<li>analysed data such as many complains, signs and symptoms and clinical conditions (human only rely on their brains and experience).</li>
+<li>using machine learning or ML methods</li>
+<li>by allowing them to augment his educated guess using computer-intensive methods</li>
+<li>by analyzing data such as many complains, signs and symptoms and clinical conditions systematically (human only relies on their brains and experience hence less reproducible).</li>
 </ul>
-<p>The end result is more accurate guess or <strong>prediction</strong>.</p>
+<p>The end result is more accurate guess or <strong>prediction of a diagnosis or outcome</strong>.</p>
 </section>
 <section id="about-me" class="slide level2">
 <h2>About me</h2>
@@ -451,6 +451,7 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 <li><p>I am a medical epidemiologist and a fellow of the American College of Epidemiology.</p></li>
 <li><p>These are the links for my <a href="https://www.scopus.com/authid/detail.uri?authorId=57194536466">SCOPUS publication</a>, my <a href="https://github.com/drkamarul">GitHub</a> and <a href="https://myanalytics.com.my/">personal webpage</a>.</p></li>
 <li><p>I am also on <a href="https://twitter.com/kamarul_imran">Twitter</a> and I welcome opportunities for future collaborations and training.</p></li>
+<li><p>Founding council member of the <a href="https://www.epidmalaysia.org/">Malaysian Association of Epidemiology</a></p></li>
 </ul>
 </div>
 </div>
@@ -458,19 +459,19 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 <section id="about-this-talk" class="slide level2">
 <h2>About this talk</h2>
 <ul>
-<li>provides very high level of doing predictive analytics in medicine using R language</li>
-<li>demonstrate very brief <strong>tidymodels</strong> package</li>
-<li>can be a starting point for physicians interested in running machine learning algorithms in RStudio IDE</li>
+<li>It provides very high level of doing predictive analytics in medicine using R language</li>
+<li>It demonstrates very briefly about <strong>tidymodels</strong> package</li>
+<li>It helps physicians to understand concepts and of machine learning workflow in RStudio IDE</li>
 </ul>
 
 <img data-src="tidymodels.PNG" class="r-stretch quarto-figure-center"><p class="caption">Tidymodels</p></section>
 <section id="inference" class="slide level2">
 <h2>Inference</h2>
-<p>In clinical and medical research</p>
+<p>In clinical and medical research scenario:</p>
 <ul>
 <li>physicians get a set of data</li>
-<li>they with the help of disease modellers use statistical modelling (most of the time) to make inferences.</li>
-<li>This is known as inference statistics</li>
+<li>with the help of disease modellers, they use statistical modelling (most of the time) to make inferences.</li>
+<li>This is inferential statistics</li>
 </ul>
 <p>Inferential statistics is formally defined as</p>
 <ul>
@@ -479,16 +480,13 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 </section>
 <section id="inference-1" class="slide level2">
 <h2>Inference</h2>
-<p>The goal of inferential statistics is to make generalizations about a population. Physicians want to understand the relationship between certain variables (such as risk factors) with having a disease or having a certain outcome of the disease.</p>
+<p>The goal of inferential statistics is to make generalizations about a population. For example, physicians want to understand the relationship between certain variables (aka risk factors) with having a disease or having a certain outcome of the disease.</p>
 <p>Read more <a href="https://www.cuemath.com/data/inferential-statistics/">here</a></p>
 
 <img data-src="XKCD.PNG" class="r-stretch quarto-figure-center"><p class="caption">Is this inference</p></section>
 <section id="prediction" class="slide level2">
 <h2>Prediction</h2>
-<ul>
-<li>Physicians use existing data set</li>
-<li>They choose models or algorithms that will reliably choose the correct outcome of a disease.</li>
-</ul>
+<p>In prediction, physicians use existing data set, and then they choose models or algorithms, so at the end they can reliably choose the correct diagnosis or outcome of a disease.</p>
 <p>The outcome can be categorical</p>
 <ul>
 <li>such as fatality (alive or dead), complications (yes or no).</li>
@@ -497,14 +495,13 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 <p>The outcome can be values</p>
 <ul>
 <li>such as values of fasting blood sugar, quality of life scores, disability scores, expression.</li>
-<li>these are examples of regression problems.</li>
+<li>These are examples of regression problems.</li>
 </ul>
 </section>
 <section id="prediction-1" class="slide level2">
 <h2>Prediction</h2>
-<p>To perform prediction (predictive analytics)</p>
+<p>To perform prediction (predictive analytics), physicians use machine learning methods. For example</p>
 <ul>
-<li>physicians usually use machine learning methods.</li>
 <li>support vector machine classifier to predict clinical deterioration on magnetic resonance imaging,</li>
 <li>random forest to predict cancer diagnosis and</li>
 <li>deep learning to classify mammogram images into cancerous or non-cancerous.</li>
@@ -527,7 +524,7 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 </section>
 <section id="tidymodels" class="slide level2">
 <h2>Tidymodels</h2>
-<p>The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.</p>
+<p>The <strong>tidymodels</strong> framework is a collection of packages for modeling and machine learning using <strong>tidyverse</strong> principles.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -547,7 +544,7 @@ Kamarul Imran Musa (Assoc Prof) <a href="https://orcid.org/0000-0002-3708-0628" 
 </section>
 <section id="tidymodels-1" class="slide level2">
 <h2>Tidymodels</h2>
-<p>The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.</p>
+<p>The <strong>tidymodels</strong> framework is a collection of packages for modeling and machine learning using <strong>tidyverse</strong> principles.</p>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -645,7 +642,7 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 <section id="split-data" class="slide level2">
 <h2>Split data</h2>
 <ul>
-<li><p>A stratified random sample would conduct the 60/80 split within each of these data subsets</p></li>
+<li><p>A stratified random sample with 60/40 split within each of these data subsets</p></li>
 <li><p>Then pool the results together.</p></li>
 <li><p>In <strong>rsample</strong>, this is achieved using the strata argument. Usually split is done 80/20 or 70/30</p></li>
 </ul>
@@ -699,7 +696,7 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </div>
 <ul>
 <li><code>tune()</code> will find the best value for making predictions</li>
-<li>mixture = 1 allows glmnet model to remove irrelevant predictors and choose a simpler model</li>
+<li>mixture = 1 allows <strong>glmnet</strong> model to remove irrelevant predictors and choose a simpler model</li>
 </ul>
 <p><strong>glmnet</strong> package:</p>
 <ul>
@@ -712,7 +709,7 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 <section id="recipe" class="slide level2">
 <h2>Recipe</h2>
 <ul>
-<li>Define the preprocessing steps using recipe</li>
+<li>Define preprocessing steps using <code>recipe()</code></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>lr_recipe <span class="ot">&lt;-</span> </span>
@@ -731,7 +728,7 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </section>
 <section id="workflow-and-tuning" class="slide level2">
 <h2>Workflow and Tuning</h2>
-<p>Create a workflow for our ML algorithm</p>
+<p>Create a workflow for ML algorithm</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>lr_workflow <span class="ot">&lt;-</span> </span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
@@ -740,8 +737,8 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </div>
 <p>Perform fine tuning</p>
 <ul>
-<li><code>dials::grid_regular()</code> : create an expanded grid based on a combination of two hyperparameters</li>
-<li>set the grid up manually using a one-column tibble with 30 candidate values</li>
+<li><code>dials::grid_regular()</code> : creates an expanded grid based on a combination of two hyperparameters</li>
+<li>sets the grid up manually using a one-column tibble with 30 candidate values</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>lr_reg_grid <span class="ot">&lt;-</span> </span>
@@ -846,7 +843,7 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </section>
 <section class="slide level2">
 
-<p>Visualize the roc curve using the bect penalty values</p>
+<p>Visualize the <code>roc</code> curve using the best penalty values</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>lr_auc <span class="ot">&lt;-</span> </span>
 <span id="cb24-2"><a href="#cb24-2"></a>  lr_res <span class="sc">%&gt;%</span> </span>
@@ -869,11 +866,12 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </div>
 </div><div class="column" style="width:30%;">
 <ul>
-<li>Clearly understand the objective of analysis: Inference or prediction</li>
+<li>Clearly understand the objective of analysis: Inference or <strong>prediction</strong></li>
 <li>Identify the data</li>
-<li>Decide the quality of data</li>
+<li>Assess quality of data</li>
 <li>Split data</li>
-<li>Pre-procession</li>
+<li>Pre-processing</li>
+<li>Tuning</li>
 <li>Test accuracy</li>
 </ul>
 </div>
@@ -882,20 +880,29 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 <section id="to-be-effective" class="slide level2">
 <h2>To be effective</h2>
 <ul>
-<li>create a team consisting of at least a subject matter expert and a programming expert</li>
-<li>vetted the workflow</li>
-<li>assess quality of prediction and vet the accuracy<br>
-</li>
-<li>do not peak data</li>
+<li>create a team consisting of at least a subject matter expert and a programming expert (and an epidemiologist or a biostatistician)</li>
+<li>vet the workflow thoroughly</li>
 <li>assess quality of data</li>
+<li>assess quality of prediction</li>
+<li>Vet the ac curacies (do multiple ML models)</li>
+<li>do not peak at data</li>
 </ul>
 </section>
-<section id="bias-in-ml-using-medical-data" class="slide level2">
-<h2>Bias in ML using medical data</h2>
+<section id="bias-in-medical-ml-projects" class="slide level2">
+<h2>Bias in medical ML projects</h2>
 <ul>
-<li>ML-based systems can be subject to systematic errors in their ability to classify subgroups of patients, estimate risk levels, or make predictions.</li>
-<li>Conflicting resuls from artificial intelligence (AI) models in health care vs in the clinical routine. due to several ethical and societal challenges</li>
-<li>For example: difference in skin color (using machine to detect abnormalities on skin)</li>
+<li>ML methods have systematic errors
+<ul>
+<li><p>errors in classifying subgroups of patients</p></li>
+<li><p>errors in estimating risk levels</p></li>
+<li><p>errors in predictions.</p></li>
+</ul></li>
+<li>Conflicting results : Accuracy from artificial intelligence (AI) models derived from medical research vs accuracy in real clinical setting. Due to
+<ul>
+<li><p>ethical differences</p></li>
+<li><p>societal variations</p></li>
+<li><p>For example: difference in skin color (using machine to detect abnormalities on skin)</p></li>
+</ul></li>
 </ul>
 <p>Read more from this <a href="https://www.nature.com/articles/s43856-021-00028-w">source</a></p>
 </section>
@@ -912,11 +919,11 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </div><div class="column" style="width:25%;">
 <p>Statistical bias</p>
 <ul>
-<li>cases in which the distribution of a given dataset is not reflecting the true distribution of the population.</li>
+<li>cases in which the <strong>distribution of a given dataset is not reflecting the true distribution</strong> of the population.</li>
 </ul>
 <p>Social bias</p>
 <ul>
-<li>inequities that may result in suboptimal outcomes for given groups of the human population</li>
+<li><strong>inequities that may result in suboptimal outcomes</strong> for given groups of the human population</li>
 </ul>
 </div>
 </div>
@@ -928,16 +935,26 @@ $ icd10cat2 &lt;fct&gt; "CI,Others", "CI,Others", "Haemorrhagic", "Haemorrhagic"
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="max.PNG"></p>
+<p></p><figcaption>at 2018 R User Conference with Max Kuhn</figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
 <ul>
-<li>Prediction is different from inference</li>
-<li>Use prediction to <strong>guess</strong> the outcome using data</li>
-<li>Not to understand the relationship between independent variable and an outcome from data</li>
-<li>Outcomes include categorical or numerical outcome</li>
-<li>Various prediction models</li>
-<li>Most models use machine learning methods</li>
-<li>Many packages but most used in R is <strong>tidymodels</strong></li>
+<li>Prediction is <strong>not</strong> inference</li>
+<li>Use prediction to <strong>guess</strong> the diagnosis or outcome using data</li>
+<li>Aim of prediction is to guess and not to understand the relationship between certain independent variable (risk factors) and the outcome of interest</li>
+<li>Predicted outcome is only one condition. This condition could be categorical (classification) or numerical (regression).</li>
+<li>Most prediction models use machine learning methods</li>
+<li>Many ML packages but most used in R is <strong>tidymodels</strong></li>
 <li>Better quality data leads to more valid prediction</li>
 </ul>
+</div>
+</div>
 <div class="footer footer-default">
 <p><a href="">Tidymodels in Med</a></p>
 </div>

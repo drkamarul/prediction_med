@@ -17,19 +17,20 @@ format:
 editor: visual
 ---
 
-## Motivation
+## Motivation 
 
-Physician usually have these roles when looking at patients data.
+Physician usually have these objectives when looking at patients data:
 
 -   to understand factors why patients develop certain diseases (inference)
--   to guess the outcomes for patients (prediction)
+-   to guess the most probable diagnosis or outcome for a patient (prediction)
 
-This talk is about the second role.
+This talk is about the second objective.
 
-For example, physicians working at ED will want to guess the correct triage category when a patient is brought to ED:
+For example,
 
--   patient A with fever, loss of appetite and lethargy
--   patient B with chest pain, sweating and history of diabetes
+-   physicians working at ED will want to guess the correct triage category when a patient is brought to ED with chest pain, sweating and history of diabetes mellitus
+
+-   an epidemiologist may want to pick the best health outcome for patients who smoke cigarettes, practice sedentary life style and has diabetes mellitus.
 
 [Slides](https://drkamarul.github.io/prediction_med/)
 
@@ -39,16 +40,16 @@ For example, physicians working at ED will want to guess the correct triage cate
 
 However, physicians' minds, no matter how bright or experienced will not able
 
--   to store, recall, and correctly analyze many medical information\
--   to optimally and accurately guess the outcome
+-   to store, recall, and correctly analyze many medical information simultenously\
+-   to optimally and accurately guess the diagnosis or outcome in complicated medical problems
 
-Predictive analytics will physicians to make *more accurate* **guess**:
+Predictive analytics helps physicians make *more accurate* **guess**:
 
--   uses machine learning or ML
--   allows clinicians to augment his guess by computers
--   analysed data such as many complains, signs and symptoms and clinical conditions (human only rely on their brains and experience).
+-   using machine learning or ML methods
+-   by allowing them to augment his educated guess using computer-intensive methods
+-   by analyzing data such as many complains, signs and symptoms and clinical conditions systematically (human only relies on their brains and experience hence less reproducible).
 
-The end result is more accurate guess or **prediction**.
+The end result is more accurate guess or **prediction of a diagnosis or outcome**.
 
 ------------------------------------------------------------------------
 
@@ -65,6 +66,8 @@ The end result is more accurate guess or **prediction**.
 -   These are the links for my [SCOPUS publication](https://www.scopus.com/authid/detail.uri?authorId=57194536466), my [GitHub](https://github.com/drkamarul) and [personal webpage](https://myanalytics.com.my/).
 
 -   I am also on [Twitter](https://twitter.com/kamarul_imran) and I welcome opportunities for future collaborations and training.
+
+-   Founding council member of the [Malaysian Association of Epidemiology](https://www.epidmalaysia.org/)
 :::
 :::
 
@@ -72,9 +75,9 @@ The end result is more accurate guess or **prediction**.
 
 ## About this talk
 
--   provides very high level of doing predictive analytics in medicine using R language
--   demonstrate very brief **tidymodels** package
--   can be a starting point for physicians interested in running machine learning algorithms in RStudio IDE
+-   It provides very high level of doing predictive analytics in medicine using R language
+-   It demonstrates very briefly about **tidymodels** package
+-   It helps physicians to understand concepts and of machine learning workflow in RStudio IDE
 
 ![Tidymodels](tidymodels.PNG)
 
@@ -82,11 +85,11 @@ The end result is more accurate guess or **prediction**.
 
 ## Inference
 
-In clinical and medical research
+In clinical and medical research scenario:
 
 -   physicians get a set of data
--   they with the help of disease modellers use statistical modelling (most of the time) to make inferences.
--   This is known as inference statistics
+-   with the help of disease modellers, they use statistical modelling (most of the time) to make inferences.
+-   This is inferential statistics
 
 Inferential statistics is formally defined as
 
@@ -96,7 +99,7 @@ Inferential statistics is formally defined as
 
 ## Inference
 
-The goal of inferential statistics is to make generalizations about a population. Physicians want to understand the relationship between certain variables (such as risk factors) with having a disease or having a certain outcome of the disease.
+The goal of inferential statistics is to make generalizations about a population. For example, physicians want to understand the relationship between certain variables (aka risk factors) with having a disease or having a certain outcome of the disease.
 
 Read more [here](https://www.cuemath.com/data/inferential-statistics/)
 
@@ -106,8 +109,7 @@ Read more [here](https://www.cuemath.com/data/inferential-statistics/)
 
 ## Prediction
 
--   Physicians use existing data set
--   They choose models or algorithms that will reliably choose the correct outcome of a disease.
+In prediction, physicians use existing data set, and then they choose models or algorithms, so at the end they can reliably choose the correct diagnosis or outcome of a disease.
 
 The outcome can be categorical
 
@@ -117,15 +119,14 @@ The outcome can be categorical
 The outcome can be values
 
 -   such as values of fasting blood sugar, quality of life scores, disability scores, expression.
--   these are examples of regression problems.
+-   These are examples of regression problems.
 
 ------------------------------------------------------------------------
 
 ## Prediction
 
-To perform prediction (predictive analytics)
+To perform prediction (predictive analytics), physicians use machine learning methods. For example
 
--   physicians usually use machine learning methods.
 -   support vector machine classifier to predict clinical deterioration on magnetic resonance imaging,
 -   random forest to predict cancer diagnosis and
 -   deep learning to classify mammogram images into cancerous or non-cancerous.
@@ -150,7 +151,7 @@ Supervised learning is a machine learning approach that's defined by its use of 
 
 ## Tidymodels
 
-The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.
+The **tidymodels** framework is a collection of packages for modeling and machine learning using **tidyverse** principles.
 
 ::: columns
 ::: {.column width="40%"}
@@ -168,7 +169,7 @@ The tidymodels framework is a collection of packages for modeling and machine le
 
 ## Tidymodels
 
-The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.
+The **tidymodels** framework is a collection of packages for modeling and machine learning using **tidyverse** principles.
 
 ::: columns
 ::: {.column width="40%"}
@@ -238,7 +239,7 @@ dead %>%
 
 ## Split data
 
--   A stratified random sample would conduct the 60/80 split within each of these data subsets
+-   A stratified random sample with 60/40 split within each of these data subsets
 
 -   Then pool the results together.
 
@@ -292,7 +293,7 @@ lr_mod <-
 ```
 
 -   `tune()` will find the best value for making predictions
--   mixture = 1 allows glmnet model to remove irrelevant predictors and choose a simpler model
+-   mixture = 1 allows **glmnet** model to remove irrelevant predictors and choose a simpler model
 
 **glmnet** package:
 
@@ -306,7 +307,7 @@ Resource is [here](https://glmnet.stanford.edu/index.html)
 
 ## Recipe
 
--   Define the preprocessing steps using recipe
+-   Define preprocessing steps using `recipe()`
 
 ```{r}
 lr_recipe <- 
@@ -326,7 +327,7 @@ lr_recipe <-
 
 ## Workflow and Tuning
 
-Create a workflow for our ML algorithm
+Create a workflow for ML algorithm
 
 ```{r}
 lr_workflow <- 
@@ -337,8 +338,8 @@ lr_workflow <-
 
 Perform fine tuning
 
--   `dials::grid_regular()` : create an expanded grid based on a combination of two hyperparameters
--   set the grid up manually using a one-column tibble with 30 candidate values
+-   `dials::grid_regular()` : creates an expanded grid based on a combination of two hyperparameters
+-   sets the grid up manually using a one-column tibble with 30 candidate values
 
 ```{r}
 lr_reg_grid <- 
@@ -417,7 +418,7 @@ lr_best
 
 ------------------------------------------------------------------------
 
-Visualize the roc curve using the bect penalty values
+Visualize the `roc` curve using the best penalty values
 
 ```{r}
 lr_auc <- 
@@ -438,28 +439,39 @@ autoplot(lr_auc)
 :::
 
 ::: {.column width="30%"}
--   Clearly understand the objective of analysis: Inference or prediction
+-   Clearly understand the objective of analysis: Inference or **prediction**
 -   Identify the data
--   Decide the quality of data
+-   Assess quality of data
 -   Split data
--   Pre-procession
+-   Pre-processing
+-   Tuning
 -   Test accuracy
 :::
 :::
 
 ## To be effective
 
--   create a team consisting of at least a subject matter expert and a programming expert
--   vetted the workflow
--   assess quality of prediction and vet the accuracy\
--   do not peak data
+-   create a team consisting of at least a subject matter expert and a programming expert (and an epidemiologist or a biostatistician)
+-   vet the workflow thoroughly
 -   assess quality of data
+-   assess quality of prediction
+-   Vet the ac curacies (do multiple ML models)
+-   do not peak at data
 
-## Bias in ML using medical data
+## Bias in medical ML projects
 
--   ML-based systems can be subject to systematic errors in their ability to classify subgroups of patients, estimate risk levels, or make predictions.
--   Conflicting resuls from artificial intelligence (AI) models in health care vs in the clinical routine. due to several ethical and societal challenges
--   For example: difference in skin color (using machine to detect abnormalities on skin)
+-   ML methods have systematic errors
+    -   errors in classifying subgroups of patients
+
+    -   errors in estimating risk levels
+
+    -   errors in predictions.
+-   Conflicting results : Accuracy from artificial intelligence (AI) models derived from medical research vs accuracy in real clinical setting. Due to
+    -   ethical differences
+
+    -   societal variations
+
+    -   For example: difference in skin color (using machine to detect abnormalities on skin)
 
 Read more from this [source](https://www.nature.com/articles/s43856-021-00028-w)
 
@@ -473,11 +485,11 @@ Read more from this [source](https://www.nature.com/articles/s43856-021-00028-w)
 ::: {.column width="25%"}
 Statistical bias
 
--   cases in which the distribution of a given dataset is not reflecting the true distribution of the population.
+-   cases in which the **distribution of a given dataset is not reflecting the true distribution** of the population.
 
 Social bias
 
--   inequities that may result in suboptimal outcomes for given groups of the human population
+-   **inequities that may result in suboptimal outcomes** for given groups of the human population
 :::
 :::
 
@@ -493,11 +505,25 @@ Social bias
 
 ## Summary
 
--   Prediction is different from inference
--   Use prediction to **guess** the outcome using data
--   Not to understand the relationship between independent variable and an outcome from data
--   Outcomes include categorical or numerical outcome
--   Various prediction models
--   Most models use machine learning methods
--   Many packages but most used in R is **tidymodels**
+
+
+::: columns
+::: {.column width="30%"}
+![at 2018 R User Conference with Max Kuhn](max.PNG)
+:::
+
+::: {.column width="70%"}
+-   Prediction is **not** inference
+-   Use prediction to **guess** the diagnosis or outcome using data
+-   Aim of prediction is to guess and not to understand the relationship between certain independent variable (risk factors) and the outcome of interest
+-   Predicted outcome is only one condition. This condition could be categorical (classification) or numerical (regression).
+-   Most prediction models use machine learning methods
+-   Many ML packages but most used in R is **tidymodels**
 -   Better quality data leads to more valid prediction
+:::
+:::
+
+
+
+
+
